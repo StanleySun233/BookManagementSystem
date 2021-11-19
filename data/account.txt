@@ -1,0 +1,6 @@
+admin admin 1
+stu1 stu1 0
+stanleysun stl 1
+admin0 admin0 0
+123 123 0
+1 1 0
