@@ -46,6 +46,8 @@ void lend::on_SerachButton_clicked()
         this->ui->BookLabel->setPixmap(QString::fromStdString(":/img/img/book/" + this->book->getISBN(z) +".jpg"));
         if (this->book->getStatus(z))
         {
+            this->book->setStatus(z,0);
+            this->book->writeBook();
             error *p = new error;
             p->show();
             p->ShowText("还书成功");

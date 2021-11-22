@@ -44,6 +44,7 @@ void borrow::on_CheckButton_clicked()
     {
         this->ui->BookNameLabel->setText(QString::fromStdString(this->book->getName(z)));
         this->ui->ISBNNameLabel->setText(QString::fromStdString(this->book->getISBN(z)));
+        this->ui->Borrower->setText(QString::fromStdString(this->book->getBorrower(z)));
         this->ui->BookLabel->setPixmap(QString::fromStdString(":/img/img/book/" + this->book->getISBN(z) +".jpg"));
         if (this->book->getStatus(z))
             this->ui->StatusLabel->setText(QString::fromStdString("已经外借"));
@@ -74,8 +75,28 @@ void borrow::on_BorrowBook_clicked()
     }
     else
     {
+        this->book->setBorrower(z,this->getLoginAccount());
+        this->book->setStatus(z,1);
+        this->book->writeBook();
+        this->ui->StatusLabel->setText(QString::fromStdString("已经外借"));
+        this->ui->Borrower->setText(QString::fromStdString(this->book->getBorrower(z)));
         error *p = new error;
         p->show();
         p->ShowText("借阅成功");
     }
+}
+
+void borrow::setAccount(Account *Acc)
+{
+    this->Acc = Acc;
+}
+
+void borrow::setLoginAccount(string s)
+{
+    this->LoginAccount = s;
+}
+
+string borrow::getLoginAccount()
+{
+    return this->LoginAccount;
 }

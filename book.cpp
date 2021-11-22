@@ -20,9 +20,12 @@ void Book::add()
         qDebug("Can't open the file!\n");
     else
         qDebug("File open successfully!\n");
-    while(!file.atEnd()) {
+    while(!file.atEnd())
+    {
         QByteArray line = file.readLine();
         QString str(line);
+        if (str.toStdString().length() <=3)
+            continue;
         qDebug(qUtf8Printable(str));
         QStringList sList = str.split(" ");
         QString t0 = sList[0];
@@ -69,3 +72,61 @@ int Book::getNo(int i)
 {
     return this->no[i];
 }
+
+void Book::writeBook()
+{
+    QString fileName = QString::fromStdString(this->getPath()) + "data/book.txt";
+    QFile file(fileName);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QFile::Truncate))
+    {
+        qDebug("Clear");
+    }
+    file.close();
+    if(file.open(QFile::WriteOnly | QFile::Text))
+    {  //以只写方式打开 | 删除之前打开的设备以建立新的连接
+        QTextStream out(&file);
+        for(int i = 0;i<this->getL();i++)
+        {
+            QString s;
+            s = QString::fromStdString(this->getISBN(i));
+            out<<s<<" ";
+
+            s = QString::fromStdString(to_string(this->getNo(i)));
+            out<<s<<" ";
+
+            s = QString::fromStdString(this->getName(i));
+            out<<s<<" ";
+
+            s = QString::fromStdString(to_string(this->getStatus(i)));
+            out<<s<<" ";
+
+            s = QString::fromStdString(this->getBorrower(i));
+            out<<s;
+            out<<"\n";
+        }
+    }
+    qDebug("数据修改成功");
+    file.close();
+}
+
+void Book::setBorrower(int i,string s)
+{
+    this->borrower[i] = s;
+}
+
+void Book::setStatus(int i,int s)
+{
+    this->status[i] = s;
+}
+
+
+string Book::getPath()
+{
+    return this->path;
+}
+
+void Book::setPath(string s)
+{
+    this->path = s;
+}
+

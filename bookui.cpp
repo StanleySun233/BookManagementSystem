@@ -13,7 +13,7 @@ bookui::~bookui()
     delete ui;
 }
 
-bookui::bookui(Account *a)
+void bookui::setAccount(Account *a)
 {
     this->Acc = a;
 }
@@ -38,22 +38,13 @@ void bookui::ShowName(string s)
 {
     this->ui->AccountLabel->setText(QString::fromStdString("登录账号:" + s));
     string a;
-    switch (this->getLoginAuth())
-    {
-        case 0:
-            a = "学生";
-            break;
-        case 1:
-            a = "管理员";
-            break;
-        case 2:
-            a = "老师";
-            break;
-    }
+    this->loginAuth = this->getLoginAuth();
+    a = this->Acc->getAuthString(this->Acc->getAuthByAcc(s));
     this->ui->AuthLabel->setText(QString::fromStdString("账号等级:" + a));
     qDebug("是否运行");
     Book *d = new Book;
     d->add();
+    d->setPath(this->Acc->getPath());
     this->setBook(d);
 }
 
@@ -64,19 +55,68 @@ void bookui::setBook(Book *bo)
 
 void bookui::on_BorrowButton_clicked()
 {
-    borrow *c = new borrow;
-    c->setBook(this->book);
-    c->show();
+    if (this->getLoginAuth() >= 2)
+    {
+        borrow *c = new borrow;
+        c->setBook(this->book);
+        c->setLoginAccount(this->loginAcc);
+        c->show();
+    }
+    else
+    {
+        error *e = new error;
+        e->ShowText("非管理员权限只能使用查询和还书功能。");
+        e->show();
+    }
 }
 
 void bookui::on_LendButton_clicked()
 {
-    lend *l = new lend;
-    l->setBook(this->book);
-    l->show();
+    if (this->getLoginAuth() >= 2)
+    {
+        lend *l = new lend;
+        l->setBook(this->book);
+        l->show();
+    }
+    else
+    {
+        error *e = new error;
+        e->ShowText("访客权限只能使用查询功能。");
+        e->show();
+    }
 }
 
-//void bookui::on_SearchButton_clicked()
-//{
+void bookui::on_AdminButton_clicked()
+{
+    if (this->getLoginAuth() >= 3)
+    {
+        auto *a = new admin;
+        a->setAuthr(getLoginAuth());
+        a->setAcc(this->Acc);
+        a->show();
+    }
+    else
+    {
+        error *e = new error;
+        e->ShowText("非超级管理员权限无法使用管理员功能。");
+        e->show();
+    }
+}
 
-//}
+void bookui::on_SearchButton_clicked()
+{
+
+    auto *s = new findd;
+    s->setBook(this->book);
+    s->show();
+}
+
+void bookui::setPath(string s)
+{
+    this->path = s;
+}
+
+string bookui::getPath()
+{
+    return this->path;
+}

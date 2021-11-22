@@ -6,40 +6,34 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>233</width>
-    <height>151</height>
+    <width>504</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>提示</string>
   </property>
-  <widget class="QWidget" name="verticalLayoutWidget">
+  <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>231</width>
-     <height>151</height>
+     <width>501</width>
+     <height>301</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QLabel" name="label">
-      <property name="font">
-       <font>
-        <family>宋体</family>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-   </layout>
+   <property name="font">
+    <font>
+     <family>宋体</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
  </widget>
  <resources/>

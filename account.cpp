@@ -1,6 +1,5 @@
 #include "account.h"
 
-
 string Account::getAcc(int i)
 {
     return this->acc[i];
@@ -55,13 +54,14 @@ void Account::addUser(string a,string p,int u)
     this->addUserLoad(a,p,u);
     QString fileName = "D:/Data/QtProject/Book4/data/account.txt";
     QFile file(fileName);
-    if(file.open(QFile::WriteOnly | QFile::Append)){  //以只写方式打开 | 删除之前打开的设备以建立新的连接
-           QTextStream out(&file);
-           QString a0;
-           a0 = QString::fromStdString(a);
-           QString p0;
-           p0 = QString::fromStdString(p);
-           out <<"\n"<< a0 <<" "<<p0<< " " << u;
+    if(file.open(QFile::WriteOnly | QFile::Append))
+    {
+       QTextStream out(&file);
+       QString a0;
+       a0 = QString::fromStdString(a);
+       QString p0;
+       p0 = QString::fromStdString(p);
+       out <<"\n"<< a0 <<" "<<p0<< " " << u;
        }
 }
 
@@ -73,9 +73,11 @@ void Account::load()
         qDebug("Can't open the file!\n");
     else
         qDebug("File open successfully!\n");
-    while(!file.atEnd()) {
+    while(!file.atEnd())
+    {
         QByteArray line = file.readLine();
         QString str(line);
+        if(str.toStdString().length() <=1)
         qDebug(qUtf8Printable(str));
         QStringList sList = str.split(" ");
         QString t0 = sList[0];
@@ -102,6 +104,72 @@ int Account::getAuthByAcc(string a)
 {
     for(int i = 0;i< this->getL();i++)
         if(a == this->getAcc(i))
-            return i;
+            return this->getAuth(i);
     return -1;
+}
+
+void Account::setPas(int i,string s)
+{
+    this->pas[i] = s;
+}
+
+void Account::save()
+{
+    QString fileName = QString::fromStdString(this->getPath()) + "data/account.txt";
+    QFile file(fileName);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QFile::Truncate))
+    {
+        qDebug("Clear");
+    }
+    file.close();
+    if(file.open(QFile::WriteOnly | QFile::Text))
+    {
+        QTextStream out(&file);
+        for(int i = 0;i<this->getL();i++)
+        {
+            QString s;
+            s = QString::fromStdString(this->getAcc(i));
+            out<<s<<" ";
+
+            s = QString::fromStdString(this->getPas(i));
+            out<<s<<" ";
+
+            s = QString::fromStdString(to_string(this->getAuth(i)));
+            out<<s;
+            out<<"\n";
+        }
+    }
+    qDebug("数据修改成功");
+    file.close();
+}
+
+void Account::setPath(string s)
+{
+    this->path = s;
+}
+
+string Account::getPath()
+{
+    return this->path;
+}
+
+void Account::setAuth(int i,int j)
+{
+    this->auth[i] = j;
+}
+
+string Account::getAuthString(int i)
+{
+    switch (i)
+    {
+        case 0:
+            return "访客";
+        case 1:
+            return "学生";
+        case 2:
+            return "普通管理员";
+        case 3:
+            return "超级管理员";
+    }
+    return "ERROR";
 }

@@ -17,10 +17,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     account.cpp \
+    admin.cpp \
+    auth.cpp \
     book.cpp \
     bookui.cpp \
     borrow.cpp \
     error.cpp \
+    findd.cpp \
     lend.cpp \
     login.cpp \
     main.cpp
@@ -28,16 +31,22 @@ SOURCES += \
 HEADERS += \
     Book.h \
     account.h \
+    admin.h \
+    auth.h \
     bookui.h \
     borrow.h \
     error.h \
+    findd.h \
     lend.h \
     login.h
 
 FORMS += \
+    admin.ui \
+    auth.ui \
     bookui.ui \
     borrow.ui \
     error.ui \
+    findd.ui \
     lend.ui \
     login.ui
 

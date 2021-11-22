@@ -74,7 +74,7 @@
         <enum>Qt::NoContextMenu</enum>
        </property>
        <property name="text">
-        <string>孙思进 周轮骅 杨隽沣 王海川</string>
+        <string>孙思进 周伦骅 杨隽沣 王海川</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>

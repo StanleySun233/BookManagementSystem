@@ -25,6 +25,13 @@ public:
     bool getStatus(int i);
     string getBorrower(int i);
     int getNo(int i);
+    void writeBook();
+    void setBorrower(int i,string s);
+    void setStatus(int i,int s);
+    string path;
+    string getPath();
+    void setPath(string s);
+
 };
 
 #endif // BOOK_H

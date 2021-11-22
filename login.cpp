@@ -23,14 +23,12 @@ void Login::on_login_clicked()
     string p = pas.toStdString();
     if (this->Acc->compare(a,p))
     {
-        qDebug("%d",1);
         bookui *p = nullptr;
         p =  new bookui;
-                qDebug("%d",2);
+        p->setPath(this->Acc->getPath());
+        p->setAccount(this->Acc);
         p->setLogin(a,this->Acc->getAuthByAcc(a));
-                qDebug("%d",3);
         p->ShowName(a);
-                qDebug("%d",4);
         p->show();
     }
     else if(!this->Acc->compareAcc(a))
@@ -59,11 +57,23 @@ void Login::on_regist_clicked()
         error *err = new error;
         err->show();
         err->ShowText("注册成功");
+        this->close();
         qDebug("success");
+    }
+    else if(a.length()<=5 or p.length()<=5)
+    {
+        error *err = new error;
+        err->show();
+        err->ShowText("账号或密码太短，请重新输入");
+        this->ui->account->clear();
+        this->ui->passowrd->clear();
+        qDebug("unsuccess");
     }
     else
     {
         error *err = new error;
+        this->ui->account->clear();
+        this->ui->passowrd->clear();
         err->show();
         err->ShowText("注册失败，账号重复");
         qDebug("unsuccess");
