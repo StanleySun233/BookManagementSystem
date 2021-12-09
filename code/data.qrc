@@ -1,0 +1,26 @@
+<RCC>
+    <qresource prefix="/data">
+        <file>data/account.txt</file>
+        <file>data/book.txt</file>
+    </qresource>
+    <qresource prefix="/img">
+        <file>img/shmtulogo.png</file>
+        <file>img/book/0002558327.jpg</file>
+        <file>img/book/002861917X.jpg</file>
+        <file>img/book/002862405X.jpg</file>
+        <file>img/book/000755303X.jpg</file>
+        <file>img/book/0001484524.jpg</file>
+        <file>img/book/0001956604.jpg</file>
+        <file>img/book/0002158434.jpg</file>
+        <file>img/book/0002163306.jpg</file>
+        <file>img/book/0002169681.jpg</file>
+        <file>img/book/0002182718.jpg</file>
+        <file>img/book/002346450X.jpg</file>
+        <file>img/book/0002550024.jpg</file>
+        <file>img/book/0002551519.jpg</file>
+        <file>img/book/0002553899.jpg</file>
+        <file>img/selfpic/pic.jpg</file>
+        <file>img/selfpic/1.png</file>
+    </qresource>
+    <qresource prefix="/img/selfpic"/>
+</RCC>

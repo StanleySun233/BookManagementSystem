@@ -1,0 +1,10 @@
+#include<string>
+using namespace std;
+class account
+{
+private:
+    string acc;
+    string pas;
+public:
+    
+};
