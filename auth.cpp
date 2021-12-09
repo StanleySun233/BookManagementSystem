@@ -77,6 +77,7 @@ void auth::on_down_clicked()
             this->ui->now->setText(QString::fromStdString(this->Acc->getAuthString(this->Acc->getAuth(z))));
             this->ui->present->setText(QString::fromStdString(this->Acc->getAuthString(this->Acc->getAuth(z + 1))));
         }
+
         else if(this->Acc->getAuth(z) == 3)
         {
             error *e = new error;
@@ -85,6 +86,7 @@ void auth::on_down_clicked()
             this->ui->now->setText(QString::fromStdString(this->Acc->getAuthString(this->Acc->getAuth(z))));
             this->ui->present->clear();
         }
+
         else
         {
             error *e = new error;

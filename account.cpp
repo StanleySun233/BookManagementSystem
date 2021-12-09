@@ -52,7 +52,7 @@ void Account::addUserLoad(string a,string p,int u)
 void Account::addUser(string a,string p,int u)
 {
     this->addUserLoad(a,p,u);
-    QString fileName = "D:/Data/QtProject/Book4/data/account.txt";
+    QString fileName = QString::fromStdString(this->getPath())+"data/account.txt";
     QFile file(fileName);
     if(file.open(QFile::WriteOnly | QFile::Append))
     {
@@ -75,10 +75,11 @@ void Account::load()
         qDebug("File open successfully!\n");
     while(!file.atEnd())
     {
+
         QByteArray line = file.readLine();
         QString str(line);
-        if(str.toStdString().length() <=1)
-        qDebug(qUtf8Printable(str));
+        if(str.toStdString().length() <=5)
+            continue;
         QStringList sList = str.split(" ");
         QString t0 = sList[0];
         QString t1 = sList[1];

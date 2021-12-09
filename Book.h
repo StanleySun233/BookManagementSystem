@@ -32,7 +32,6 @@ public:
     string path;
     string getPath();
     void setPath(string s);
-
 };
 
 #endif // BOOK_H

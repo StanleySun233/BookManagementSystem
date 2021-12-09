@@ -57,7 +57,6 @@ void Login::on_regist_clicked()
         error *err = new error;
         err->show();
         err->ShowText("注册成功");
-        this->close();
         qDebug("success");
     }
     else if(a.length()<=5 or p.length()<=5)
